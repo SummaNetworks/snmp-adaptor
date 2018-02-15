@@ -47,14 +47,18 @@
 						</goals>
 						<phase>package</phase>
 						<configuration>
-							<descriptors>
+							<!-- descriptors>
 								<descriptor>src/assembly/mib-generator.xml</descriptor>
-							</descriptors>
+							</descriptors -->
 							<archive>
 								<manifest>
-									<mainClass>org.jboss.jmx.adaptor.snmp.generator.MIBGenerator</mainClass>
+									<!-- mainClass>org.jboss.jmx.adaptor.snmp.generator.MIBGenerator</mainClass -->
+									<mainClass>org.jboss.snmp.mib.generator.MIBGenerator</mainClass>
 								</manifest>
 							</archive>
+							<descriptorRefs>
+								<descriptorRef>jar-with-dependencies</descriptorRef>
+							</descriptorRefs>
 						</configuration>
 					</execution>
 				</executions>
