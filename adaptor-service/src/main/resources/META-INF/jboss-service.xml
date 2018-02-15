@@ -121,8 +121,12 @@
         </mbean>
         <mbean name="jboss.cache:service=Cache,config=*">
         	<notification type="org.jboss.cache.ViewChanged"/>
-        </mbean>      
-       
+        </mbean>
+
+        <mbean name="javax.slee.management:name=Alarm">
+          <notification type="javax.slee.management.alarm"></notification>
+        </mbean>
+
         <!--mbean name="jboss.system:service=ServiceController">
         	<notification type="org.jboss.system.ServiceMBean.start"/>
         	<notification type="org.jboss.system.ServiceMBean.stop"/>
