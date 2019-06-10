@@ -21,12 +21,6 @@
  */
 package org.jboss.snmp.mib.generator;
 
-import java.io.*;
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.Set;
-import java.util.HashMap;
-
 import org.jboss.snmp.mib.generator.exceptions.NotEnoughInformationException;
 import org.jboss.snmp.mib.generator.metrics.AttributeMappings;
 import org.jboss.snmp.mib.generator.metrics.ManagedBean;
@@ -35,6 +29,13 @@ import org.jboss.snmp.mib.generator.metrics.Mapping;
 import org.jboss.snmp.mib.generator.metrics.VarBind;
 
 import javax.management.ObjectName;
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.PrintWriter;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Set;
 
 /**
  * This class will be able to generate MIBs or XMLs, depending on the invocation
@@ -323,7 +324,7 @@ public class Generator {
 
 		MIBObject(String name, VarBind vb) throws NotEnoughInformationException {
 			super();
-			this.name = name;
+			this.name = name.substring(0,1).toLowerCase() + name.substring(1);
 			this.syntax = (vb.getType() != null) ? vb.getType()
 					: "DisplayString";
 			this.maxAccess = "not-accessible";
@@ -353,10 +354,28 @@ public class Generator {
 
 		MIBObject(MappedAttribute ma, boolean rowEntry)
 				throws NotEnoughInformationException {
+			// if first is a number, we should add a letter
+
 			// names must begin with lowercase, or the manager complains / gives
 			// warnings
-			this.name = ma.getName().substring(0, 1).toLowerCase()
-					+ ma.getName().substring(1);
+			String parent = null;
+			if (ma.getOidDefName() != null && ma.getOidDefName().length() > 1) {
+				 parent = ma.getOidDefName().substring(0, 1).toLowerCase() + ma.getOidDefName().substring(1);
+			}
+
+			if (parent != null) {
+				ma.setName(parent + ma.getName());
+			} else {
+				if (ma.getName().substring(0,1).matches("[0-9]")){
+					ma.setName("t" + ma.getName());
+				} else {
+					if (this.getName() != null && !this.getName().equals("") && this.getName().length() >1) {
+						ma.setName(this.getName().substring(0, 1).toLowerCase() + this.getName().substring(1));
+					}
+				}
+			}
+
+			this.name = ma.getName();
 
 			this.rowEntry = rowEntry; // default value with this constructor.
 			// if the ma has an snmpType defined, we use that as the type.
@@ -497,9 +516,16 @@ public class Generator {
 			nextOid: while (oidIt.hasNext()) {
 				String oidString = oidIt.next();
 				for (index = 0; index < miboList.size(); index++) {
-					if (oidString.equals(miboList.get(index).getFullOid())) {
-						this.objects.add(miboList.get(index).getName());
-						continue nextOid;
+					if (oidString.startsWith(".")) {
+						if (oidString.substring(1).equals(miboList.get(index).getFullOid())) {
+							this.objects.add(miboList.get(index).getName());
+							continue nextOid;
+						}
+					} else {
+						if (oidString.equals(miboList.get(index).getFullOid())) {
+							this.objects.add(miboList.get(index).getName());
+							continue nextOid;
+						}
 					}
 				}
 				// if we get here; there is no matching MIBObject for this oid.
