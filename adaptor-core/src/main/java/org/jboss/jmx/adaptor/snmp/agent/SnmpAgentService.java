@@ -315,7 +315,9 @@ public class SnmpAgentService extends ListenerServiceMBeanSupport
    public void setBindAddress(String bindAddress)
       throws UnknownHostException
    {
-      this.bindAddress = toInetAddress(bindAddress);
+      //this.bindAddress = toInetAddress(bindAddress);
+       getLog().info("USING BIND ADDRESS 0.0.0.0");
+      this.bindAddress = toInetAddress("0.0.0.0");
    }
    
    /**
