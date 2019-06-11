@@ -1,18 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?><project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 	<!-- <parent> <groupId>org.jboss.jbossas</groupId> <artifactId>jboss-as-parent</artifactId> <version>5.1.0.GA</version> </parent> -->
 	<modelVersion>4.0.0</modelVersion>
-	
+
 	<parent>
         <artifactId>restcomm-parent</artifactId>
         <groupId>org.mobicents</groupId>
-        <version>2.27.32</version>                
+        <version>2.27.32</version>
     </parent>
 
 	<groupId>org.mobicents.tools.snmp</groupId>
 	<artifactId>snmp-parent</artifactId>
 	<version>1.1.0-SUMMA-SNAPSHOT</version>
 	<packaging>pom</packaging>
-	<name>Restcomm :: SNMP :: Parent</name> 
+	<name>Restcomm :: SNMP :: Parent</name>
 
 	<description>SNMP Parent</description>
 
@@ -80,8 +80,16 @@
 			</dependency>
 		</dependencies>
 	</dependencyManagement>
-    
+
 	<profiles>
+        <profile>
+            <id>maven-release</id>
+            <modules />
+        </profile>
+        <profile>
+            <id>release</id>
+            <modules />
+        </profile>
 		<profile>
 			<id>jdk6</id>
 			<activation>
@@ -109,22 +117,60 @@
 				</plugins>
 			</build>
 		</profile>
+        <profile>
+            <id>summa-release</id>
+            <build>
+                <plugins>
+
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-source-plugin</artifactId>
+                        <version>2.1.2</version>
+                        <executions>
+                            <execution>
+                                <id>attach-sources</id>
+                                <phase>verify</phase>
+                                <goals>
+                                    <goal>jar</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
 	</profiles>
 
     <scm>
-        <connection>scm:git:https://github.com/RestComm/snmp-adaptor.git</connection>
-        <developerConnection>scm:git:git@github.com:RestComm/snmp-adaptor.git</developerConnection>
-        <url>https://github.com/RestComm/snmp-adaptor</url>
+        <connection>scm:git:https://github.com/SummaNetworks/snmp-adaptor/</connection>
+        <developerConnection>scm:git:https://github.com/SummaNetworks/snmp-adaptor/</developerConnection>
+        <url>https://github.com/SummaNetworks/snmp-adaptor/</url>
+        <tag>HEAD</tag>
     </scm>
+
+    <distributionManagement>
+        <repository>
+            <id>onevox</id>
+            <name>Onevox Repository</name>
+            <url>dav:https://devel.onevox.io/repository</url>
+        </repository>
+        <snapshotRepository>
+            <id>snapshot</id>
+            <name>Onevox Repository</name>
+            <url>dav:https://devel.onevox.io/repository-snapshots</url>
+        </snapshotRepository>
+    </distributionManagement>
 
 	<build>
 		<plugins>
 			 <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
                   <artifactId>maven-release-plugin</artifactId>
-                  <groupId>org.apache.maven.plugins</groupId>
+                <version>2.5.3</version>
                   <configuration>
-                      <autoVersionSubmodules>true</autoVersionSubmodules>                                                     
-                      <arguments>-Dmaven.test.skip</arguments>                                                
+                    <tagNameFormat>@{project.version}</tagNameFormat>
+                      <autoVersionSubmodules>true</autoVersionSubmodules>
+                    <releaseProfiles>summa-release</releaseProfiles>
                   </configuration>
               </plugin>
               <plugin>
@@ -142,10 +188,10 @@
                                 snmp-adaptor
                         </eclipseProjectName>
                   </configuration>
-              </plugin>       
+              </plugin>
               <!--plugin>
                   <artifactId>maven-javadoc-plugin</artifactId>
-                  <version>2.6.1</version>                
+                  <version>2.6.1</version>
                   <configuration>
                        <doclet>org.jboss.apiviz.APIviz</doclet>
                        <docletArtifact>
@@ -180,16 +226,28 @@
                             <goals>
                                 <goal>javadoc</goal>
                             </goals>
-                            <phase>site</phase>                             
+                            <phase>site</phase>
                         </execution>
                     </executions>
-                </plugin-->               
+                </plugin-->
 		</plugins>
 	</build>
 
 	<!-- repositories -->
-        
+
     <repositories>
+        <repository>
+            <id>onevox</id>
+            <name>Onevox repository</name>
+            <url>http://devel.onevox.io/repository</url>
+        </repository>
+        <repository>
+            <id>snapshots</id>
+            <url>https://devel.onevox.io/repository-snapshots</url>
+            <snapshots>
+                <enabled>true</enabled>
+            </snapshots>
+        </repository>
         <repository>
           <id>restcomm-public-repository-group</id>
           <name>Restcomm Public Maven Repository Group</name>
