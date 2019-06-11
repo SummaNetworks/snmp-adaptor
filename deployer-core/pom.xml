@@ -19,8 +19,8 @@
 	<properties>
 		<!-- redefine in your POM if you want to change in manifest file -->
 		<manifest.url>http://www.restcomm.org</manifest.url>
-		<manifest.implementation.title>${pom.groupId}:${pom.artifactId}</manifest.implementation.title>
-		<manifest.implementation.version>${pom.version}</manifest.implementation.version>
+		<manifest.implementation.title>${project.groupId}:${project.artifactId}</manifest.implementation.title>
+		<manifest.implementation.version>${project.version}</manifest.implementation.version>
 		<manifest.implementation.vendor>JBoss, a Red Hat division</manifest.implementation.vendor>
 	</properties>
 
@@ -37,7 +37,7 @@
 		<dependency>
 			<groupId>org.mobicents.tools.snmp.adaptor</groupId>
 			<artifactId>core</artifactId>
-			<version>${pom.version}</version>
+			<version>${project.version}</version>
 			<scope>provided</scope>
 		</dependency>
 		<dependency>

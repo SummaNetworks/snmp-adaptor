@@ -23,13 +23,13 @@
 	<properties>
 		<!-- redefine in your POM if you want to change in manifest file -->
 		<manifest.url>http://www.restcomm.org</manifest.url>
-		<manifest.implementation.title>${pom.groupId}:${pom.artifactId}</manifest.implementation.title>
-		<manifest.implementation.version>${pom.version}</manifest.implementation.version>
+		<manifest.implementation.title>${project.groupId}:${project.artifactId}</manifest.implementation.title>
+		<manifest.implementation.version>${project.version}</manifest.implementation.version>
 		<manifest.implementation.vendor>JBoss, a Red Hat division</manifest.implementation.vendor>
 
 		<!-- node to which adaptor will be deployed -->
 		<node>default</node>
-		<mibgen.plugin.version>${pom.version}</mibgen.plugin.version>
+		<mibgen.plugin.version>${project.version}</mibgen.plugin.version>
 	</properties>
 	<build>
 
@@ -123,7 +123,7 @@
 										</condition>
 
 										<unjar
-											src="${project.build.directory}/${artifactId}-${project.version}-sar.jar"
+											src="${project.build.directory}/${project.artifactId}-${project.version}-sar.jar"
 											dest="${jboss.dir}/server/${node}/deploy/snmp-adaptor.sar" />
 
 									</tasks>
@@ -186,9 +186,9 @@
 	</profiles>
 	<dependencies>
 		<dependency>
-			<groupId>${pom.groupId}</groupId>
+			<groupId>${project.groupId}</groupId>
 			<artifactId>core</artifactId>
-			<version>${pom.version}</version>
+			<version>${project.version}</version>
 		</dependency>
 
 		<dependency>
