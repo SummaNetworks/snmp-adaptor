@@ -23,13 +23,10 @@
 	<properties>
 		<!-- redefine in your POM if you want to change in manifest file -->
 		<manifest.url>http://www.restcomm.org</manifest.url>
-		<manifest.implementation.title>${project.groupId}:${project.artifactId}</manifest.implementation.title>
-		<manifest.implementation.version>${project.version}</manifest.implementation.version>
 		<manifest.implementation.vendor>JBoss, a Red Hat division</manifest.implementation.vendor>
 
 		<!-- node to which adaptor will be deployed -->
 		<node>default</node>
-		<mibgen.plugin.version>${project.version}</mibgen.plugin.version>
 	</properties>
 	<build>
 
@@ -41,10 +38,10 @@
 					<archive>
 						<manifestEntries>
 							<Implementation-Title>
-								${manifest.implementation.title}
+								${project.groupId}:${project.artifactId}
 							</Implementation-Title>
 							<Implementation-Version>
-								${manifest.implementation.version}
+								${project.version}
 							</Implementation-Version>
 							<Implementation-Vendor-Id>
 								${manifest.implementation.vendor}
@@ -59,7 +56,7 @@
 			<plugin>
 				<groupId>org.mobicents.tools.snmp.mib</groupId>
 				<artifactId>maven-plugin</artifactId>
-				<version>${mibgen.plugin.version}</version>
+				<version>${project.version}</version>
 				<configuration>
 
 					<attributesFile>${basedir}/src/main/resources/attributes.xml</attributesFile>
