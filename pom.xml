@@ -10,7 +10,7 @@
 
 	<groupId>org.mobicents.tools.snmp</groupId>
 	<artifactId>snmp-parent</artifactId>
-	<version>1.1.0-SUMMA-SNAPSHOT</version>
+	<version>1.1.0-SUMMA</version>
 	<packaging>pom</packaging>
 	<name>Restcomm :: SNMP :: Parent</name>
 
@@ -103,7 +103,7 @@
 						<version>2.0.2</version>
 						<configuration>
 							<compilerArguments>
-								<g/>
+								<g />
 							</compilerArguments>
 							<source>1.5</source>
 							<target>1.5</target>
@@ -145,7 +145,7 @@
         <connection>scm:git:https://github.com/SummaNetworks/snmp-adaptor/</connection>
         <developerConnection>scm:git:https://github.com/SummaNetworks/snmp-adaptor/</developerConnection>
         <url>https://github.com/SummaNetworks/snmp-adaptor/</url>
-        <tag>HEAD</tag>
+        <tag>1.1.0-SUMMA</tag>
     </scm>
 
     <distributionManagement>
@@ -178,7 +178,7 @@
                   <groupId>org.mobicents.tools</groupId>
                   <version>1.0.0.FINAL</version>
                   <inherited>false</inherited>
-                  <executions/>
+                  <executions />
                   <configuration>
                         <!--generateProjectsForModules>true</generateProjectsForModules-->
                         <resolveTransitiveDependencies>
@@ -214,11 +214,11 @@
                               <javadocDirectory>${basedir}/src/javadoc</javadocDirectory>
                               <docfilessubdirs>true</docfilessubdirs>
                               <overview>${basedir}/src/javadoc/overview.html</overview>
-                              <detectLinks/>
-                              <detectOfflineLinks/>
-                              <includeDependencySources/>
-                              <includeTransitiveDependencySources/>
-                          <linksource/>
+                              <detectLinks />
+                              <detectOfflineLinks />
+                              <includeDependencySources />
+                              <includeTransitiveDependencySources />
+                          <linksource />
                      </configuration>
                      <executions>
                          <execution>
