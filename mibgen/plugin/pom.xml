@@ -3,7 +3,7 @@
 	<parent>
         <groupId>org.mobicents.tools.snmp.mib</groupId>
         <artifactId>mib-parent</artifactId>
-        <version>1.1.0-SUMMA-SNAPSHOT</version>
+        <version>1.1.1-SUMMA-SNAPSHOT</version>
     </parent>
     <name>Restcomm :: SNMP :: MIB :: Maven-Plugin</name>
 
