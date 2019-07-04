@@ -1,13 +1,10 @@
-<project
-	xmlns="http://maven.apache.org/POM/4.0.0"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 
 	<modelVersion>4.0.0</modelVersion>
 	<parent>
 		<groupId>org.mobicents.tools.snmp</groupId>
 		<artifactId>snmp-parent</artifactId>
-		<version>2.9.0-SUMMA-1.0.0</version>
+		<version>1.1.2-SUMMA-SNAPSHOT</version>
 	</parent>
 
 	<name>Restcomm :: SNMP :: Adaptor :: Core</name>
@@ -22,8 +19,8 @@
 	<properties>
 		<!-- redefine in your POM if you want to change in manifest file  -->
 		<manifest.url>http://www.restcomm.org</manifest.url>
-		<manifest.implementation.title>${pom.groupId}:${pom.artifactId}</manifest.implementation.title>
-		<manifest.implementation.version>${pom.version}</manifest.implementation.version>
+		<manifest.implementation.title>${project.groupId}:${project.artifactId}</manifest.implementation.title>
+		<manifest.implementation.version>${project.version}</manifest.implementation.version>
 		<manifest.implementation.vendor>JBoss, a Red Hat division</manifest.implementation.vendor>
 	</properties>
 

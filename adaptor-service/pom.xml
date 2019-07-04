@@ -1,13 +1,10 @@
-<project
-	xmlns="http://maven.apache.org/POM/4.0.0"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 
 	<modelVersion>4.0.0</modelVersion>
 	<parent>
 		<groupId>org.mobicents.tools.snmp</groupId>
 		<artifactId>snmp-parent</artifactId>
-		<version>2.9.0-SUMMA-1.0.0</version>
+		<version>1.1.2-SUMMA-SNAPSHOT</version>
 	</parent>
 
 	<name>Restcomm :: SNMP :: Adaptor :: Service</name>
@@ -23,13 +20,10 @@
 	<properties>
 		<!-- redefine in your POM if you want to change in manifest file -->
 		<manifest.url>http://www.restcomm.org</manifest.url>
-		<manifest.implementation.title>${pom.groupId}:${pom.artifactId}</manifest.implementation.title>
-		<manifest.implementation.version>${pom.version}</manifest.implementation.version>
 		<manifest.implementation.vendor>JBoss, a Red Hat division</manifest.implementation.vendor>
 
 		<!-- node to which adaptor will be deployed -->
 		<node>default</node>
-		<mibgen.plugin.version>${pom.version}</mibgen.plugin.version>
 	</properties>
 	<build>
 
@@ -41,10 +35,10 @@
 					<archive>
 						<manifestEntries>
 							<Implementation-Title>
-								${manifest.implementation.title}
+								${project.groupId}:${project.artifactId}
 							</Implementation-Title>
 							<Implementation-Version>
-								${manifest.implementation.version}
+								${project.version}
 							</Implementation-Version>
 							<Implementation-Vendor-Id>
 								${manifest.implementation.vendor}
@@ -59,7 +53,7 @@
 			<plugin>
 				<groupId>org.mobicents.tools.snmp.mib</groupId>
 				<artifactId>maven-plugin</artifactId>
-				<version>${mibgen.plugin.version}</version>
+				<version>${project.version}</version>
 				<configuration>
 
 					<attributesFile>${basedir}/src/main/resources/attributes.xml</attributesFile>
@@ -115,16 +109,11 @@
 								<phase>package</phase>
 								<configuration>
 									<tasks>
-										<condition
-											property="jboss.dir"
-											value="${jboss.home}"
-											else="${env.JBOSS_HOME}">
+										<condition property="jboss.dir" value="${jboss.home}" else="${env.JBOSS_HOME}">
 											<isset property="jboss.home" />
 										</condition>
 
-										<unjar
-											src="${project.build.directory}/${artifactId}-${project.version}-sar.jar"
-											dest="${jboss.dir}/server/${node}/deploy/snmp-adaptor.sar" />
+										<unjar src="${project.build.directory}/${project.artifactId}-${project.version}-sar.jar" dest="${jboss.dir}/server/${node}/deploy/snmp-adaptor.sar" />
 
 									</tasks>
 								</configuration>
@@ -137,10 +126,7 @@
 								<phase>clean</phase>
 								<configuration>
 									<tasks>
-										<condition
-											property="jboss.dir"
-											value="${jboss.home}"
-											else="${env.JBOSS_HOME}">
+										<condition property="jboss.dir" value="${jboss.home}" else="${env.JBOSS_HOME}">
 											<isset property="jboss.home" />
 										</condition>
 										<delete dir="${jboss.dir}/server/${node}/deploy/snmp-adaptor.sar" />
@@ -186,9 +172,9 @@
 	</profiles>
 	<dependencies>
 		<dependency>
-			<groupId>${pom.groupId}</groupId>
+			<groupId>${project.groupId}</groupId>
 			<artifactId>core</artifactId>
-			<version>${pom.version}</version>
+			<version>${project.version}</version>
 		</dependency>
 
 		<dependency>
